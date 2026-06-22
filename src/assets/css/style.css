@@ -2,25 +2,9 @@
 
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Frutiger';
-  src: url('../fonts/frutiger/Frutiger.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Frutiger';
-  src: url('../fonts/frutiger/Frutiger_bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* Font families */
-  --font-family-frutiger: "Frutiger", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-family-frutiger: "Bricolage Grotesque", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-family-dm-mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
   --font-family-playfair: "Playfair Display", ui-serif, Georgia, serif;
   --font-family-syne: "Syne", ui-sans-serif, system-ui, sans-serif;
