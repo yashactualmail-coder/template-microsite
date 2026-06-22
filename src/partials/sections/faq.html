@@ -1,0 +1,183 @@
+<!-- Combined About & FAQs Section -->
+<section id="about" class="relative text-[#515151] py-12 lg:py-[5.556vw] px-4 md:px-[2.778vw]"
+  style="background: linear-gradient(to bottom, #ffffff 0%, #ffffff 15%, #F4FAFD 50%, #F4FAFD 100%);">
+  <div class="w-[90%] lg:w-[82vw] max-w-[1180px] mx-auto flex flex-col">
+
+    <!-- About Content -->
+    <div class="w-full max-w-5xl mx-auto flex flex-col space-y-5 mb-12 lg:mb-[5.556vw]">
+      <!-- Header Row: Title & Blue Underline -->
+      <div class="w-full">
+        <div class="flex items-baseline gap-4 flex-wrap">
+          <h2
+            style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(24px, 1.944vw, 28px); line-height: clamp(20px, 1.722vw, 24.8px); color: #515151; letter-spacing: 0%; vertical-align: middle; leading-trim: none;">
+            {{about.title}}
+          </h2>
+          <div
+            class="h-2 rounded-none bg-[#0093DD] rounded-full w-[25%] lg:w-[27.778%] max-w-[300px] min-w-[100px] lg:min-w-[150px]">
+          </div>
+        </div>
+      </div>
+
+      <!-- Body Content -->
+      <div class="w-full">
+        <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-style: normal; font-size: clamp(16px, 1.944vw, 20px); line-height: clamp(24px, 2.278vw, 32px); color: #515151; letter-spacing: 0%; vertical-align: middle; leading-trim: none;"
+          class="text-justify whitespace-pre-line">
+          {{about.description}}
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ Header -->
+    <div id="faqs" class="w-full max-w-7xl">
+      <div class="text-center mb-8 lg:mb-[4.861vw]">
+        <h2
+          style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(28px, 4.931vw, 71px); line-height: 110%; color: #000000; letter-spacing: -0.02em;">
+          {{faqs.title}}
+        </h2>
+      </div>
+
+      <!-- Accordion List -->
+      <div class="flex flex-col items-center w-full">
+        <div id="faq-list" class="flex flex-col w-full lg:w-[55vw] lg:max-w-[800px]"
+          style="gap: clamp(21.5px, 4vw, 42px);">
+          {{#each faqs.questions}}
+          <div class="faq-item hidden rounded-lg shadow-lg transition-all duration-300 px-7 lg:px-10 py-5 lg:py-6"
+            data-index="{{@index}}">
+            <!-- Accordion Header Button -->
+            <button
+              class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none cursor-pointer group"
+              aria-expanded="false">
+              <span class="text-black pr-4 lg:pr-6"
+                style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(14px, 1.25vw, 18px); line-height: 140%; letter-spacing: 0px;">
+                {{this.question}}
+              </span>
+              <!-- Down Arrowhead in dark circle -->
+              <span
+                class="faq-icon shrink-0 w-10 h-10 lg:w-11 lg:h-11 rounded-full bg-[#1A191B] text-white flex items-center justify-center transition-transform duration-300 select-none"
+                style="font-size: 14px;">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- Accordion Panel Content -->
+            <div class="faq-panel max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="pt-4 lg:pt-5 pb-1 text-[#515151] leading-relaxed"
+                style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(13px, 0.972vw, 15px); line-height: 170%;">
+                {{this.answer}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+
+        <!-- Load More Button Container -->
+        <div id="load-more-container" class="mt-8 lg:mt-[4.167vw] flex justify-center hidden">
+          <button id="btn-load-more"
+            class="px-8 py-3 bg-[#FFCC08] text-[#1A191B] border-[2px] border-black rounded-full font-syne font-bold uppercase tracking-widest text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] transition-all duration-150 cursor-pointer focus:outline-none">
+            Load More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Accordion & Pagination Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+    const totalItems = faqItems.length;
+
+    // Gradient colors: white (#ffffff) → baby blue (#E8F4FA)
+    function getGradientColor(index, total) {
+      const startR = 255, startG = 255, startB = 255;   // #ffffff
+      const endR = 232, endG = 244, endB = 250;         // #E8F4FA
+      const t = total > 1 ? index / (total - 1) : 0;
+      const r = Math.round(startR + (endR - startR) * t);
+      const g = Math.round(startG + (endG - startG) * t);
+      const b = Math.round(startB + (endB - startB) * t);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    // Apply gradient colors to all cards
+    function applyGradientColors() {
+      faqItems.forEach((item, index) => {
+        item.dataset.gradientColor = getGradientColor(index, totalItems);
+        // Only apply gradient color if not currently expanded
+        if (item.querySelector('.faq-trigger').getAttribute('aria-expanded') !== 'true') {
+          item.style.backgroundColor = item.dataset.gradientColor;
+        }
+      });
+    }
+
+    applyGradientColors();
+
+    // Accordion Toggle
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        const panel = trigger.nextElementSibling;
+        const icon = trigger.querySelector('.faq-icon');
+        const card = trigger.closest('.faq-item');
+
+        // Close other panels & restore their gradient color
+        document.querySelectorAll('.faq-trigger').forEach(otherTrigger => {
+          if (otherTrigger !== trigger) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            otherTrigger.nextElementSibling.style.maxHeight = null;
+            otherTrigger.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+            const otherCard = otherTrigger.closest('.faq-item');
+            otherCard.style.backgroundColor = otherCard.dataset.gradientColor;
+          }
+        });
+
+        if (isExpanded) {
+          trigger.setAttribute('aria-expanded', 'false');
+          panel.style.maxHeight = null;
+          icon.style.transform = 'rotate(0deg)';
+          card.style.backgroundColor = card.dataset.gradientColor;
+        } else {
+          trigger.setAttribute('aria-expanded', 'true');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          icon.style.transform = 'rotate(180deg)';
+          card.style.backgroundColor = '#ffffff';
+        }
+      });
+    });
+
+    // Pagination logic
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const btnLoadMore = document.getElementById('btn-load-more');
+    const ITEMS_PER_PAGE = 7;
+    let currentVisibleCount = 0;
+
+    function showNextItems() {
+      const targetCount = currentVisibleCount + ITEMS_PER_PAGE;
+
+      faqItems.forEach((item, index) => {
+        if (index < targetCount) {
+          item.classList.remove('hidden');
+          currentVisibleCount = Math.max(currentVisibleCount, index + 1);
+        }
+      });
+
+      if (currentVisibleCount >= faqItems.length) {
+        loadMoreContainer.classList.add('hidden');
+      } else {
+        loadMoreContainer.classList.remove('hidden');
+      }
+    }
+
+    if (faqItems.length > 0) {
+      showNextItems();
+    }
+
+    btnLoadMore.addEventListener('click', () => {
+      showNextItems();
+    });
+  });
+</script>

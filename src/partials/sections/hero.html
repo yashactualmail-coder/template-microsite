@@ -1,0 +1,82 @@
+<section class="relative h-[740px] lg:h-auto bg-center text-white overflow-hidden pt-[60px] pb-8 lg:p-0 flex items-start lg:block" style="background-image: url('{{hero.backgroundImage}}'); background-size: 100% 100%;">
+  <!-- Decorative background elements -->
+  <div class="absolute inset-0 bg-black/10 z-0"></div>
+  
+  <!-- Blue Mark (Aligned to top-right of screen, capped with max-width to scale with zoom) -->
+  {{#if hero.decorations.desktopBlueMark}}
+  <img src="{{hero.decorations.desktopBlueMark}}" alt="" class="hidden lg:block absolute z-0 pointer-events-none" style="width: 12.5%; max-width: 180px; top: 0%; right: 0%;" />
+  {{/if}}
+  
+  <!-- Centered Desktop Canvas Container (1440x720 aspect ratio) -->
+  <div class="w-full relative mx-auto max-w-[1440px] lg:aspect-[2/1] h-full lg:h-auto z-10">
+    
+    <!-- Decorative Marks (Inside centered canvas to prevent drifting) -->
+    
+    <!-- Orange Mark (y = 571px / 720px, x = 513px / 1440px) -->
+    {{#if hero.decorations.desktopOrangeMark}}
+    <img src="{{hero.decorations.desktopOrangeMark}}" alt="" class="hidden lg:block absolute z-0 pointer-events-none transform rotate-[-9.87deg]" style="width: 11.5%; top: 71%; left: 37.5%;" />
+    {{/if}}
+    
+    <!-- Mobile Only Independent Speech Bubbles -->
+    <!-- Orange Mark (left) -->
+    {{#if hero.decorations.mobileOrangeMark}}
+    <img src="{{hero.decorations.mobileOrangeMark}}" alt="" class="block lg:hidden absolute z-10 pointer-events-none transform rotate-[-9.87deg] w-[25%] left-[5px] top-[360px]" />
+    {{/if}}
+    
+    <!-- Blue Mark (right) -->
+    {{#if hero.decorations.mobileBlueMark}}
+    <img src="{{hero.decorations.mobileBlueMark}}" alt="" class="block lg:hidden absolute z-10 pointer-events-none w-[22%] right-[-5px] top-[320px]" />
+    {{/if}}
+    
+    <!-- Mobile Flow Layout (rendered on mobile) / Desktop Absolute Layout (rendered on desktop) -->
+    <div class="w-full h-full lg:absolute lg:inset-0">
+      
+      <!-- Left Column (Text & Assets) -->
+      <div class="flex flex-col justify-center items-center text-center w-full px-4 space-y-4 lg:absolute lg:left-[5.972%] lg:top-[10.417%] lg:w-[38.889%] lg:h-[73.333%] lg:flex lg:flex-col lg:justify-between lg:items-start lg:text-left lg:space-y-0 lg:p-0">
+        <div>
+          <h2 class="text-[#FEC400]" style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-style: normal; font-size: clamp(28px, 4.028vw, 58px); line-height: 110%; letter-spacing: 0%; vertical-align: middle;">
+            {{hero.tagline}}
+          </h2>
+          <h1 class="text-white mt-2 lg:mt-4 font-bold" style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-style: normal; font-size: clamp(22px, 2.917vw, 42px); line-height: 120%; letter-spacing: 0%; vertical-align: middle;">
+            {{{hero.title}}}
+          </h1>
+        </div>
+        
+        <!-- Badge & Presents Row -->
+        <div class="flex items-center justify-center lg:justify-start space-x-6 w-full mt-2 lg:mt-0">
+          {{#each hero.logos}}
+          <img src="{{this.img}}" alt="{{this.alt}}" class="{{this.classes}}" />
+          {{/each}}
+        </div>
+        
+        <!-- Mobile Only FAQ Image -->
+        <img src="{{hero.fatherImage}}" alt="FAQ? Logo" class="block lg:hidden w-[70%] max-w-[280px] h-auto object-contain mx-auto mt-2" />
+        
+        <!-- Mobile Only Subtitle -->
+        <p class="block lg:hidden text-white text-center -mt-4" style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-style: normal; font-size: clamp(20px, 2.917vw, 36px); line-height: 120%; letter-spacing: 0%; vertical-align: middle;">
+          {{hero.subtitle}}
+        </p>
+
+        <!-- Desktop Only Father Photo Asset (FAQ? logo) -->
+        <div class="hidden lg:block relative w-[76.2%] aspect-[426/211] overflow-hidden rounded-xl">
+          <img src="{{hero.fatherImage}}" alt="Father Celebration" class="w-full h-full object-cover" />
+        </div>
+        
+        <!-- Desktop Only Subtitle/Brand Name -->
+        <p class="hidden lg:block text-white" style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-style: normal; font-size: clamp(24px, 2.917vw, 42px); line-height: clamp(26px, 2.986vw, 43px); letter-spacing: 0%; vertical-align: middle; leading-trim: none;">
+          {{hero.subtitle}}
+        </p>
+      </div>
+
+      <!-- Illustration Wrapper (Inside centered canvas to prevent drifting) -->
+      <div class="absolute z-20 shrink-0 max-lg:bottom-[-200px] max-lg:left-[48%] max-lg:-translate-x-1/2 max-lg:w-[155%] max-lg:max-w-[600px] lg:left-[29.5%] lg:top-[-6%] lg:w-[86%] lg:h-[148.8%] lg:translate-x-0 lg:bottom-auto">
+        <!-- Main Illustration -->
+        <img src="{{hero.mainIllustration}}" alt="Key Visual Illustration" class="w-full h-auto lg:h-full object-contain drop-shadow-2xl" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+

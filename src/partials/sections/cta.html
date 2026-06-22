@@ -1,0 +1,56 @@
+<section class="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-[#FFF9E5]/40 via-white to-white flex flex-col items-center overflow-hidden">
+  <div class="w-full max-w-[1180px] flex flex-col items-center">
+    
+    <!-- CTA Card -->
+    <div class="w-full bg-white rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-gray-100/30 px-6 py-10 md:px-16 md:py-12 flex flex-col items-center text-center lg:flex-row lg:justify-between lg:items-center lg:text-left gap-8 lg:gap-12 relative z-10 overflow-hidden">
+      
+      <!-- Right Overlapping Speech Bubbles (Desktop: Right, Mobile: Top using flex-order - spaced out) -->
+      <div class="relative w-[220px] h-[150px] md:w-[280px] md:h-[200px] flex-shrink-0 lg:mr-4 order-1 lg:order-2">
+        <!-- Blue Bubble (left/top - shifted higher) -->
+        <img src="./assets/images/bluemarkCTA.png" alt="" class="absolute top-[-20px] left-0 w-[60%] h-auto object-contain" />
+        <!-- Orange Bubble (right/bottom - shifted lower and rotated clockwise/right) -->
+        <img src="./assets/images/orangemark.png" alt="" class="absolute bottom-[-20px] right-0 w-[50%] h-auto object-contain transform rotate-[9.87deg]" />
+      </div>
+
+      <!-- Left text and CTA button (Desktop: Left, Mobile: Bottom using flex-order) -->
+      <div class="flex flex-col items-center text-center lg:items-start lg:text-left space-y-8 lg:space-y-10 max-w-xl order-2 lg:order-1">
+        <div class="flex flex-col items-center lg:items-start space-y-0">
+          <h2 class="text-black font-bold text-3xl md:text-[38px] leading-tight font-frutiger">
+            {{cta.cardTitle}}
+          </h2>
+          <p class="max-w-md" style="font-family: 'Inter', sans-serif; font-weight: 400; font-style: normal; font-size: clamp(16px, 1.389vw, 20px); line-height: clamp(20px, 1.722vw, 24.8px); color: #515151; letter-spacing: 0%; leading-trim: none;">
+            {{cta.cardSubtitle}}
+            <br class="hidden lg:block" />
+          </p>
+        </div>
+        <a href="{{cta.buttonUrl}}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#FEAA00] text-black font-bold font-frutiger px-7 py-3 rounded-lg shadow-[0_4px_14px_rgba(254,170,0,0.45)] hover:bg-[#FFB71C] hover:shadow-[0_6px_20px_rgba(254,170,0,0.6)] transition-all duration-200 cursor-pointer">
+          {{cta.buttonText}}
+          <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Tagline below the card -->
+    <div class="flex flex-col items-center mt-12 md:mt-20 w-full text-center">
+      <p style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(13.72px, calc(2.39vw + 5.12px), 40px); line-height: clamp(10.64px, calc(1.851vw + 3.98px), 32px); color: #000000; letter-spacing: 0%; leading-trim: none;">
+        {{cta.topText}}
+      </p>
+      
+      <div class="flex items-center justify-center w-full gap-3 md:gap-6 my-2 md:my-8">
+        <div class="h-[1.5px] flex-grow max-w-[48px] md:max-w-[150px] bg-[#CDD6DA]/70"></div>
+        <h2 style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(27.45px, calc(4.778vw + 10.25px), 82px); line-height: clamp(24.59px, calc(1.073vw + 20.73px), 42px); color: #15225E; letter-spacing: 0%; leading-trim: none; text-align: center;">
+          “Just one<br class="block md:hidden" /> more question”
+        </h2>
+        <div class="h-[1.5px] flex-grow max-w-[48px] md:max-w-[150px] bg-[#CDD6DA]/70"></div>
+      </div>
+
+      <p style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: clamp(13.72px, calc(2.39vw + 5.12px), 40px); line-height: clamp(10.64px, calc(1.851vw + 3.98px), 32px); color: #000000; letter-spacing: 0%; leading-trim: none;">
+        {{cta.bottomText}}
+      </p>
+    </div>
+
+  </div>
+</section>

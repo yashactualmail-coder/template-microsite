@@ -1,0 +1,28 @@
+<!-- Reels Section -->
+<section id="reels" class="relative py-12 lg:py-[6.25vw] px-4 md:px-[2.778vw] bg-gradient-to-b from-white to-[#FFF9E5]">
+  <div class="w-[90%] lg:w-[82vw] max-w-[1180px] mx-auto w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-[4.167vw] items-center">
+      <!-- Left Column: Title and Subtitle -->
+      <div class="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-[1.111vw]">
+        <h2 style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(28px, 4.931vw, 71px); line-height: 100%; color: #000000; letter-spacing: -0.02em;">
+          {{reels.title}}
+        </h2>
+        <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-style: normal; font-size: clamp(14px, 1.389vw, 20px); line-height: 150%; color: #515151;" class="whitespace-pre-line max-w-[367px] mx-auto lg:mx-0">
+          {{reels.subtitle}}
+        </p>
+      </div>
+      
+      <!-- Right Column: Reels Cards -->
+      <div class="lg:col-span-7 flex flex-col sm:flex-row gap-6 lg:gap-[1.667vw] justify-center items-center lg:justify-end w-full">
+        {{#each reels.items}}
+          <div class="bg-[#D9D9D9] p-6 lg:p-[1.667vw] flex flex-col justify-start items-start rounded-sm hover:scale-[1.02] transition-transform duration-300 shadow-sm hover:shadow-md cursor-pointer w-[280px] lg:w-[20vw] lg:max-w-[288px] lg:min-w-[240px] h-[440px] lg:h-[33.333vw] lg:max-h-[480px] lg:min-h-[400px]">
+            <span style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(18px, 1.667vw, 24px); color: #000000; line-height: 100%;">
+              {{this.title}}
+            </span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</section>
+

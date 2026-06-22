@@ -1,0 +1,302 @@
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bricolage+Grotesque:ital,opsz,wght@0,12..96,200..800;1,12..96,200..800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Syne:wght@400..800&display=swap");
+
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Frutiger';
+  src: url('../fonts/frutiger/Frutiger.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Frutiger';
+  src: url('../fonts/frutiger/Frutiger_bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Font families */
+  --font-family-frutiger: "Frutiger", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-family-dm-mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-family-playfair: "Playfair Display", ui-serif, Georgia, serif;
+  --font-family-syne: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-family-bricolage: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+
+  /* Italic variants (pair with font-style: italic) */
+  --font-family-dm-mono-italic: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-family-playfair-italic: "Playfair Display", ui-serif, Georgia, serif;
+  --font-family-syne-italic: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-family-bricolage-italic: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+
+  /* Font colors */
+  --color-cream: #f6f0e7;
+  --color-gold: #eec86d;
+  --color-ink: #0a0a08;
+  --color-bronze: #7f5d00;
+}
+
+@theme {
+  /* Font families → font-dm-mono, font-playfair, etc. */
+  --font-frutiger: var(--font-family-frutiger);
+  --font-dm-mono: var(--font-family-dm-mono);
+  --font-playfair: var(--font-family-playfair);
+  --font-syne: var(--font-family-syne);
+  --font-bricolage: var(--font-family-bricolage);
+  --font-display: var(--font-family-syne);
+
+  /* Italic families → font-*-italic utilities */
+  --font-dm-mono-italic: var(--font-family-dm-mono-italic);
+  --font-playfair-italic: var(--font-family-playfair-italic);
+  --font-syne-italic: var(--font-family-syne-italic);
+  --font-bricolage-italic: var(--font-family-bricolage-italic);
+
+  /* Colors → text-cream, bg-gold, border-ink, etc. */
+  --color-cream: #f6f0e7;
+  --color-gold: #eec86d;
+  --color-ink: #0a0a08;
+  --color-bronze: #7f5d00;
+
+  /* Custom animation keyframes */
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+}
+
+@utility font-dm-mono-italic {
+  font-family: var(--font-family-dm-mono-italic);
+  font-style: italic;
+}
+
+@utility font-playfair-italic {
+  font-family: var(--font-family-playfair-italic);
+  font-style: italic;
+}
+
+@utility font-syne-italic {
+  font-family: var(--font-family-syne-italic);
+  font-style: italic;
+}
+
+@utility font-bricolage-italic {
+  font-family: var(--font-family-bricolage-italic);
+  font-style: italic;
+}
+
+/* Layout */
+@utility section-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  padding-inline: 1rem;
+}
+
+@utility section-dark {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  padding-block: 5rem;
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+/* Typography */
+@utility text-hero-title {
+  font-family: var(--font-family-playfair);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-cream);
+  text-align: center;
+}
+
+@utility text-hero-lead {
+  font-family: var(--font-family-bricolage);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-cream) 88%, transparent);
+  text-align: center;
+}
+
+@utility text-section-title {
+  font-family: var(--font-family-syne);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-gold);
+  text-align: center;
+}
+
+@utility text-section-subtitle {
+  font-family: var(--font-family-bricolage);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--color-cream) 90%, transparent);
+  text-align: center;
+}
+
+@utility text-premise {
+  font-family: var(--font-family-playfair-italic);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-gold);
+  text-align: center;
+}
+
+@utility text-body {
+  font-family: var(--font-family-bricolage);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--color-cream) 82%, transparent);
+}
+
+@utility text-label {
+  font-family: var(--font-family-dm-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+@utility text-card-id {
+  font-family: var(--font-family-dm-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: var(--color-bronze);
+}
+
+@utility text-card-title {
+  font-family: var(--font-family-syne);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-cream);
+}
+
+@utility text-card-subtitle {
+  font-family: var(--font-family-bricolage);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--color-cream) 72%, transparent);
+}
+
+@utility text-speaker-name {
+  font-family: var(--font-family-syne);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-cream);
+}
+
+@utility text-speaker-role {
+  font-family: var(--font-family-dm-mono-italic);
+  font-size: 0.8125rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--color-gold);
+}
+
+@utility text-cta-tagline {
+  font-family: var(--font-family-playfair-italic);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-gold);
+  text-align: center;
+}
+
+@utility text-footer-line {
+  font-family: var(--font-family-bricolage);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-cream) 85%, transparent);
+  text-align: center;
+}
+
+/* Components */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.75rem;
+  font-family: var(--font-family-bricolage);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+  background-color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+
+  &:hover {
+    background-color: var(--color-cream);
+    border-color: var(--color-cream);
+  }
+}
+
+@utility card-pillar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 35%, transparent);
+  background-color: color-mix(in srgb, var(--color-ink) 92%, var(--color-bronze) 8%);
+}
+
+@utility card-speaker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: hidden;
+  background-color: var(--color-ink);
+  border: 1px solid color-mix(in srgb, var(--color-bronze) 25%, transparent);
+}
+
+@utility card-award {
+  padding: 1rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 25%, transparent);
+  background-color: color-mix(in srgb, var(--color-ink) 96%, var(--color-gold) 4%);
+}
+
+@utility segment-item {
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--color-gold);
+  background-color: color-mix(in srgb, var(--color-ink) 94%, var(--color-gold) 6%);
+}
