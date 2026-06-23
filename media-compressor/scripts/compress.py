@@ -10,22 +10,21 @@ BACKUP_DIR = os.path.join(WORKSPACE, ".media-backup")
 STATE_FILE = os.path.join(WORKSPACE, ".agents", "media-compressor-state.json")
 
 def install_system_vips():
-    # Detect package manager and try to install libvips system package
     if shutil.which("apt-get"):
         try:
-            print("Installing libvips via apt-get...")
+            print("Installing libvips via apt-get...", file=sys.stderr)
             subprocess.run(["sudo", "apt-get", "update", "-y"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             subprocess.run(["sudo", "apt-get", "install", "-y", "libvips-dev"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             return True
         except Exception as e:
-            print(f"apt-get installation failed: {e}")
+            print(f"apt-get installation failed: {e}", file=sys.stderr)
     elif shutil.which("brew"):
         try:
-            print("Installing libvips via Homebrew...")
+            print("Installing libvips via Homebrew...", file=sys.stderr)
             subprocess.run(["brew", "install", "vips"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             return True
         except Exception as e:
-            print(f"Homebrew installation failed: {e}")
+            print(f"Homebrew installation failed: {e}", file=sys.stderr)
     return False
 
 def setup_vips_dependencies():
@@ -33,22 +32,22 @@ def setup_vips_dependencies():
         import pyvips
         return True
     except ImportError:
-        print("pyvips not found. Attempting to install...")
+        print("pyvips not found. Attempting to install...", file=sys.stderr)
         try:
             subprocess.run([sys.executable, "-m", "pip", "install", "pyvips"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             import pyvips
             return True
         except Exception:
-            print("Python pip installation of pyvips failed. Trying to install system libvips first...")
+            print("Python pip installation of pyvips failed. Trying to install system libvips first...", file=sys.stderr)
             if install_system_vips():
                 try:
                     subprocess.run([sys.executable, "-m", "pip", "install", "pyvips"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                     import pyvips
                     return True
                 except Exception as e:
-                    print(f"Failed to install pyvips after system dependency installation: {e}")
+                    print(f"Failed to install pyvips after system dependency installation: {e}", file=sys.stderr)
             else:
-                print("Could not install system libvips dependencies automatically.")
+                print("Could not install system libvips dependencies automatically.", file=sys.stderr)
     return False
 
 def compress_file(filepath, backup_path, use_vips):
@@ -66,7 +65,7 @@ def compress_file(filepath, backup_path, use_vips):
                 image.write_to_file(filepath, Q=75, lossless=False)
             return True
         except Exception as e:
-            print(f"pyvips compression failed for {os.path.basename(filepath)}: {e}. Falling back to ffmpeg.")
+            print(f"pyvips compression failed for {os.path.basename(filepath)}: {e}. Falling back to ffmpeg.", file=sys.stderr)
             
     # Fallback to ffmpeg
     temp_out = filepath + ".tmp.png"
@@ -82,14 +81,13 @@ def compress_file(filepath, backup_path, use_vips):
         else:
             if os.path.exists(temp_out):
                 os.remove(temp_out)
-            # Revert to original if no savings
             shutil.copy2(backup_path, filepath)
         return True
     except Exception as e:
         if os.path.exists(temp_out):
             os.remove(temp_out)
         shutil.copy2(backup_path, filepath)
-        print(f"ffmpeg fallback failed for {os.path.basename(filepath)}: {e}")
+        print(f"ffmpeg fallback failed for {os.path.basename(filepath)}: {e}", file=sys.stderr)
         return False
 
 def main():
@@ -102,9 +100,9 @@ def main():
         
     use_vips = setup_vips_dependencies()
     if use_vips:
-        print("Using high-performance libvips engine for compression.")
+        print("Using high-performance libvips engine for compression.", file=sys.stderr)
     else:
-        print("Using ffmpeg engine for fallback compression.")
+        print("Using ffmpeg engine for fallback compression.", file=sys.stderr)
         
     results = []
     files = [f for f in os.listdir(TARGET_DIR) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp', '.gif'))]
@@ -119,28 +117,33 @@ def main():
         compress_file(filepath, backup_path, use_vips)
         
         new_size = os.path.getsize(filepath)
-        savings = ((orig_size - new_size) / orig_size) * 100
         
-        results.append({
-            "path": os.path.relpath(filepath, WORKSPACE),
-            "originalSize": orig_size,
-            "newSize": new_size,
-            "savings": round(savings, 2)
-        })
+        results.append([
+            os.path.relpath(filepath, WORKSPACE),
+            orig_size,
+            new_size
+        ])
         
-    results.sort(key=lambda x: x["originalSize"], reverse=True)
+    # Sort results by original size descending
+    results.sort(key=lambda x: x[1], reverse=True)
     
+    # Save minified state data
     state_data = {
-        "currentIndex": len(results),
-        "results": results
+        "idx": min(20, len(results)),
+        "res": results
     }
     with open(STATE_FILE, "w") as f:
-        json.dump(state_data, f, indent=2)
+        json.dump(state_data, f)
         
+    # Directly output Markdown table to stdout
     print("| File Path | Original Size | Compressed Size | Savings (%) |")
     print("| --- | --- | --- | --- |")
     for r in results[:20]:
-        print(f"| {r['path']} | {r['originalSize']} | {r['newSize']} | {r['savings']}% |")
+        savings = round(((r[1] - r[2]) / r[1]) * 100, 2)
+        print(f"| {r[0]} | {r[1]} | {r[2]} | {savings}% |")
+        
+    if len(results) > 20:
+        print(f"\n> **Note**: To see the next 20 files, reply with `/compress-media next`.")
 
 if __name__ == "__main__":
     main()
