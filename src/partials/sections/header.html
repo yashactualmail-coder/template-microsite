@@ -12,7 +12,7 @@
     <!-- Navigation Links (Desktop only) -->
     <nav class="hidden lg:flex items-center space-x-6 md:space-x-8">
       {{#each header.navLinks}}
-        <a href="{{this.url}}" class="text-black hover:text-[#FEC400] transition-colors duration-150 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#FEC400] hover:after:w-full after:transition-all after:duration-200" style="font-family: 'Inter', sans-serif; font-weight: 500; font-style: normal; font-size: clamp(13px, 1.11vw, 16px); line-height: 100%; letter-spacing: 0%; leading-trim: none;">
+        <a href="{{this.url}}" class="text-black hover:text-[#FEC400] transition-colors duration-150 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-[#FEC400] hover:after:w-full after:transition-all after:duration-200 text-header-nav-link">
           {{this.label}}
         </a>
       {{/each}}
@@ -28,7 +28,7 @@
     <!-- Dropdown Menu (Mobile only) -->
     <div id="mobile-menu-dropdown" class="hidden absolute top-full left-0 right-0 bg-white border-b border-zinc-100 shadow-md py-4 flex flex-col items-center space-y-4 z-40">
       {{#each header.navLinks}}
-        <a href="{{this.url}}" class="mobile-nav-link text-black hover:text-[#FEC400] transition-colors duration-150 w-full text-center py-2 font-medium" style="font-family: 'Inter', sans-serif; font-size: 16px; line-height: 100%; letter-spacing: 0%;">
+        <a href="{{this.url}}" class="mobile-nav-link text-black hover:text-[#FEC400] transition-colors duration-150 w-full text-center py-2 font-medium text-header-mobile-nav-link">
           {{this.label}}
         </a>
       {{/each}}

@@ -1,6 +1,5 @@
 <!-- Combined About & FAQs Section -->
-<section id="about" class="relative text-[#515151] py-12 lg:py-[5.556vw] px-4 md:px-[2.778vw]"
-  style="background: linear-gradient(to bottom, #ffffff 0%, #ffffff 15%, #F4FAFD 50%, #F4FAFD 100%);">
+<section id="about" class="relative text-[#515151] py-12 lg:py-[5.556vw] px-4 md:px-[2.778vw] bg-faq-gradient">
   <div class="w-[90%] lg:w-[82vw] max-w-[1180px] mx-auto flex flex-col">
 
     <!-- About Content -->
@@ -8,8 +7,7 @@
       <!-- Header Row: Title & Blue Underline -->
       <div class="w-full">
         <div class="flex items-baseline gap-4 flex-wrap">
-          <h2
-            style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(24px, 1.944vw, 28px); line-height: clamp(20px, 1.722vw, 24.8px); color: #515151; letter-spacing: 0%; vertical-align: middle; leading-trim: none;">
+          <h2 class="text-faq-about-title">
             {{about.title}}
           </h2>
           <div
@@ -20,8 +18,7 @@
 
       <!-- Body Content -->
       <div class="w-full">
-        <p style="font-family: 'Inter', sans-serif; font-weight: 400; font-style: normal; font-size: clamp(16px, 1.944vw, 20px); line-height: clamp(24px, 2.278vw, 32px); color: #515151; letter-spacing: 0%; vertical-align: middle; leading-trim: none;"
-          class="text-justify whitespace-pre-line">
+        <p class="text-justify whitespace-pre-line text-faq-about-desc">
           {{about.description}}
         </p>
       </div>
@@ -30,16 +27,14 @@
     <!-- FAQ Header -->
     <div id="faqs" class="w-full max-w-7xl">
       <div class="text-center mb-8 lg:mb-[4.861vw]">
-        <h2
-          style="font-family: 'Frutiger', 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(28px, 4.931vw, 71px); line-height: 110%; color: #000000; letter-spacing: -0.02em;">
+        <h2 class="text-faq-section-title">
           {{faqs.title}}
         </h2>
       </div>
 
       <!-- Accordion List -->
       <div class="flex flex-col items-center w-full">
-        <div id="faq-list" class="flex flex-col w-full lg:w-[55vw] lg:max-w-[800px]"
-          style="gap: clamp(21.5px, 4vw, 42px);">
+        <div id="faq-list" class="flex flex-col w-full lg:w-[55vw] lg:max-w-[800px] gap-faq-list">
           {{#each faqs.questions}}
           <div class="faq-item hidden rounded-lg shadow-lg transition-all duration-300 px-7 lg:px-10 py-5 lg:py-6"
             data-index="{{@index}}">
@@ -47,14 +42,12 @@
             <button
               class="faq-trigger w-full flex items-center justify-between text-left focus:outline-none cursor-pointer group"
               aria-expanded="false">
-              <span class="text-black pr-4 lg:pr-6"
-                style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(14px, 1.25vw, 18px); line-height: 140%; letter-spacing: 0px;">
+              <span class="text-black pr-4 lg:pr-6 text-faq-question">
                 {{this.question}}
               </span>
               <!-- Down Arrowhead in dark circle -->
               <span
-                class="faq-icon shrink-0 w-10 h-10 lg:w-11 lg:h-11 rounded-full bg-[#1A191B] text-white flex items-center justify-center transition-transform duration-300 select-none"
-                style="font-size: 14px;">
+                class="faq-icon shrink-0 w-10 h-10 lg:w-11 lg:h-11 rounded-full bg-[#1A191B] text-white flex items-center justify-center transition-transform duration-300 select-none text-[14px]">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -64,8 +57,7 @@
 
             <!-- Accordion Panel Content -->
             <div class="faq-panel max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-              <div class="pt-4 lg:pt-5 pb-1 text-[#515151] leading-relaxed"
-                style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: clamp(13px, 0.972vw, 15px); line-height: 170%;">
+              <div class="pt-4 lg:pt-5 pb-1 text-[#515151] leading-relaxed text-faq-answer">
                 {{this.answer}}
               </div>
             </div>

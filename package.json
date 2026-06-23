@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "audit": "node microsite-validator/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

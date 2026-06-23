@@ -1,0 +1,16 @@
+{
+  "name": "microsite-validator",
+  "version": "1.0.0",
+  "description": "Vite template microsite validation utility",
+  "main": "index.js",
+  "bin": {
+    "microsite-validator": "./index.js"
+  },
+  "keywords": [
+    "validator",
+    "microsite",
+    "seo"
+  ],
+  "author": "",
+  "license": "ISC"
+}
